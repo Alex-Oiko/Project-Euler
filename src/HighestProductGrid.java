@@ -38,80 +38,70 @@ public class HighestProductGrid{
 		
 		//int nums[]={8,02,22,97};
 		//System.out.println(calculateProduct(nums));
-		int horizontal=calculateHorizontally(arr);
-		System.out.println("max result horizontally is "+horizontal);
-		int vertical=calculateVertically(arr);
-		System.out.println("max result vertically is "+vertical);
-		int diagonal=calculateDiagonally(arr);
+		System.out.println(arr[0][1]);
+		int vertically = calculateVertically(arr);
+		System.out.println(vertically);
+		int horizontally = calculateHorizontally(arr);
+		System.out.println(horizontally);
+		int rightDiagonally = calculateRightDiagonally(arr);
+		System.out.println(rightDiagonally);
 		
 	}
 	
 	public static int calculateVertically(int[][] arr){
-		int[] farr=new int[4];
-		int counter=4;
-		int result=0;
-		int maxResult=0;
-		
+		int maxProduct=1;
+		int product=1;
 		for(int i=0;i<arr.length;i++){
-			for(int k=0;k<arr[i].length-3;k++){
-				for(int s=0;s<4;s++){
-					farr[s]=arr[k+s][i];
+			for(int f=0;f<arr.length-3;f++){
+				int counterPlusFour = f+4;
+				for(int counter=f;counter<counterPlusFour;counter++){
+					product*=arr[counter][i];
 				}
-				result=calculateProduct(farr);
-				if(maxResult<result)
-					maxResult=result;
-				for(int t=0;t<4;t++){
-					farr[t]=0;
-				}
+				if(product>maxProduct)
+					maxProduct=product;
+			product=1;
 			}
 		}
-		return maxResult;
+		return maxProduct;
 	}
 	
-	public static int calculateDiagonally(int[][] arr){
-		int[] farr=new int[4];
-		int counter=4;
-		int result=0;
-		int maxResult=0;
-		
-		for(int i=arr.length-3;i>3;i--){
-			for(int k=0;k<arr.length-3;k++){
-				for(int s=0;s<4;s++){
-					farr[s]=arr[i+s][k+s];
+	public static int calculateRightDiagonally(int[][] arr){
+		int maxProduct=1;
+		for(int i=1;i<arr.length;i++){
+			for(int f=0;f<i;f++){
+				int product=1;
+				int counter=1;
+				for(int t=f;t<f+4;t++){
+					if(i-counter<0 || t>19)
+						break;
+				product*=arr[i-counter][t];
+				//System.out.println((i-counter)+" "+t+" "+arr[i-counter][t]);
+				counter++;
 				}
-				//result=calculateProduct(farr);
-				//if(maxResult<result)
-				//	maxResult=result;
+				if(product>maxProduct)
+					maxProduct=product;
 			}
-			System.out.println("");
-			for(int t=0;t<4;t++){
-				System.out.println(farr[t]);
-				farr[t]=0;
-			}
-		}
-		return maxResult;
+			
+			
+		}	
+		return maxProduct;
 	}
 	
 	public static int calculateHorizontally(int[][] arr){
-		int[] farr=new int[4];
-		int counter=4;
-		int result=0;
-		int maxResult=0;
-		
+		int maxProduct=0;
+		int product=1;
 		for(int i=0;i<arr.length;i++){
-			for(int k=0;k<arr[i].length-3;k++){
-				for(int s=0;s<4;s++){
-					farr[s]=arr[i][k+s];
+			for(int f=0;f<arr.length-3;f++){
+				int counterPlusFour=f+4;
+				for(int counter=f;counter<counterPlusFour;counter++){
+					product*=arr[i][counter];
 				}
-				result=calculateProduct(farr);
-				if(maxResult<result)
-					maxResult=result;
-				for(int t=0;t<4;t++){
-					farr[t]=0;
-				}
+				if(product>maxProduct)
+					maxProduct=product;
+				product=1;
 			}
 		}
-		return maxResult;
+		return maxProduct;
 	}
 	
 	public static int calculateProduct(int[] nums){
