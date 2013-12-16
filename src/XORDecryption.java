@@ -18,54 +18,23 @@ public class XORDecryption {
 	
 	public static void main(String[] args){
 		parseFile();
-		
-		/*System.out.println(Integer.toBinaryString(65));
-		System.out.println(Integer.toBinaryString(42));
-		
-		//System.out.println(Integer.parseInt("001011", 2));
-		
-		System.out.println("asdas");
-		System.out.println(fillBinary(42, 65));
-		System.out.println(fillBinary(65, 42));
-		
-		System.out.println("potatot");
-		System.out.println(XOR(65, 42));
-		System.out.println(Integer.parseInt(XOR(65, 42),2));*/
-		System.out.println(alphabet.length);
+		System.out.println(65^42);
+		//System.out.println(Integer.parseInt(XOR(65, 42),2));
+		//System.out.println(alphabet.length);
 	}
-	
-	
-	public static String XOR(int n,int n1){
-		char[] bin1C = fillBinary(n, n1).toCharArray();
-		char[] bin2C= fillBinary(n1, n).toCharArray();
-		StringBuffer sb = new StringBuffer();
-		for(int i=0;i<bin1C.length;i++){
-			//System.out.println(bin1C[i]+" "+bin2C[i]);
-			if(bin1C[i]=='1' && bin2C[i]=='1')
-				sb.append("0");
-			else if(bin1C[i]=='1' && bin2C[i]=='0')
-				sb.append("1");
-			else if(bin1C[i]=='0' && bin2C[i]=='1')
-				sb.append("1");
-			else
-				sb.append("0");
-		}
-		return sb.toString();
-	}
-	
-	
-	public static String fillBinary(int n,int n1){
-		String nBinaryString = Integer.toBinaryString(n);
-		String n1BinaryString = Integer.toBinaryString(n1);
-		if(nBinaryString.length()<n1BinaryString.length()){
-			StringBuffer sb = new StringBuffer(nBinaryString);
-			while(sb.length()<n1BinaryString.length()){
-				sb.insert(0, "0");
+	public static void permuteAlphabet(){
+		char[] arr=new char[3];
+		for(int i=0;i<alphabet.length;i++){
+			for(int f=0;f<3;f++){
+				arr[f]=alphabet[i];
 			}
-			return sb.toString();
 		}
-		return nBinaryString;
 	}
+	
+	public static void decryptSentence(){
+		
+	}
+	
 	
 	public static void parseFile(){
 		try{

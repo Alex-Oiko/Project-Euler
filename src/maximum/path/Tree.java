@@ -1,44 +1,60 @@
 package maximum.path;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Tree {
 	
 	private Node root;
-	HashMap<Integer,ArrayList<Integer>> children;
-	HashMap<Integer,ArrayList<Node>> childrenNodes;
-	
 	
 	public Tree(Node root){
 		this.root=root;
-	}	
-	
-	public Node getRoot() {
-		return root;
-	}
-
-	public void setRoot(Node root) {
-		this.root = root;
-	}
-	public HashMap<Integer, ArrayList<Integer>> getChildren() {
-		return children;
-	}
-
-	public void setChildren(HashMap<Integer, ArrayList<Integer>> children) {
-		this.children = children;
-	}
-	public Node getNode(Integer depth,int index){
-		return childrenNodes.get(depth).get(index); 
-	}
-
-	public HashMap<Integer, ArrayList<Node>> getChildrenNodes() {
-		return childrenNodes;
-	}
-
-	public void setChildrenNodes(HashMap<Integer, ArrayList<Node>> childrenNodes) {
-		this.childrenNodes = childrenNodes;
 	}
 	
+	public boolean addChild(Node node,Node theroot){		
+		while(true){
+			
+			if(theroot.getLeft()==null && theroot.getRight()==null){
+				theroot.setLeft(node);
+				theroot.getLeft().setNeightbour(null); 
+				return true;
+			}
+			else if(theroot.getLeft()!=null && theroot.getRight()==null){
+				theroot.setRight(node);
+				theroot.getLeft().setNeightbour(node);
+				theroot.getRight().setNeightbour(theroot.getLeft());
+				return true;
+			}
+			else if(!this.nodeHasChildren(theroot.getLeft())){
+				addChild(node, theroot.getRight());
+				return true;
+			}
+			else{
+				addChild(node, theroot.getLeft());
+				return true;
+			}
+		}
+		
+		
+	}
+	public void traverseTree(Node root){
+		while(true){
+			System.out.println(root.getValue());
+			if(root.getLeft()==null && root.getRight()==null)
+				break;
+				
+			traverseTree(root.getLeft());
+			traverseTree(root.getRight());
+			break;
+		}
+	}
+	public boolean nodeHasChildren(Node node){
+		if(node.getLeft()!=null && node.getRight()!=null)
+			return true;
+		else return false;
+	}
 	
+	public boolean removeChild(){
+		return false;
+	}
+
 }
