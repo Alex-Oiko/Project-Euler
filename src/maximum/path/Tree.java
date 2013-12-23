@@ -9,27 +9,38 @@ public class Tree {
 	public Tree(Node root){
 		this.root=root;
 	}
-	
+	//NEED TO CHECK NEIGHBOURS LEFT NODE TO SEE IF NULL. IF NOT ADD THAT AS YOUR LEFT ONE AND THE NEW NODE AS THE RIGHT......PEEEEEEEACE
 	public boolean addChild(Node node,Node theroot){		
 		while(true){
 			
-			if(theroot.getLeft()==null && theroot.getRight()==null){
-				theroot.setLeft(node);
-				theroot.getLeft().setNeightbour(null); 
-				return true;
+			if(theroot.getLeft()==null && theroot.getRight()==null){//if both null
+				if(theroot.getLeftNeightbor()!=null && theroot.getLeftNeightbor().getRight()!=null){//if lefts neighbor right is not null and left neighbor is not null
+					theroot.setLeft(theroot.getLeftNeightbor().getRight());//set the left to the left's neighbors right
+					theroot.setRight(node);//set the right to the node
+					theroot.getRight().setLeftNeightbor(theroot.getLeft());
+					theroot.getLeft().setRightNeighbor(theroot.getRight());
+					return true;
+				}
+				else{
+					theroot.setLeft(node);
+					theroot.getLeft().setRightNeighbor(null);
+					return true;
+				}
 			}
 			else if(theroot.getLeft()!=null && theroot.getRight()==null){
 				theroot.setRight(node);
-				theroot.getLeft().setNeightbour(node);
-				theroot.getRight().setNeightbour(theroot.getLeft());
+				theroot.getLeft().setRightNeighbor(node);
+				theroot.getRight().setLeftNeightbor(theroot.getLeft());
 				return true;
 			}
-			else if(!this.nodeHasChildren(theroot.getLeft())){
-				addChild(node, theroot.getRight());
+			else if((theroot.getLeft().getLeft()==null && theroot.getLeft().getRight()==null) || 
+					(theroot.getLeft().getLeft()!=null && theroot.getLeft().getRight()==null) ||
+					(theroot.getLeft().getLeft()!=null && theroot.getLeft().getLeft()!=null && theroot.getRight().getLeft()!=null && theroot.getRight().getRight()!=null)){
+				addChild(node, theroot.getLeft());
 				return true;
 			}
 			else{
-				addChild(node, theroot.getLeft());
+				addChild(node, theroot.getRight());
 				return true;
 			}
 		}
@@ -47,7 +58,9 @@ public class Tree {
 			break;
 		}
 	}
-	public boolean nodeHasChildren(Node node){
+	public boolean HasChildren(Node node){
+		System.out.println(node.getLeft());
+		System.out.println(node.getRight());
 		if(node.getLeft()!=null && node.getRight()!=null)
 			return true;
 		else return false;
@@ -56,5 +69,12 @@ public class Tree {
 	public boolean removeChild(){
 		return false;
 	}
-
+	
+	public void printTree(Node theroot){
+		if(theroot==null)
+			return;
+		System.out.println(theroot);
+		printTree(theroot.getLeft());
+		printTree(theroot.getRight());
+	}
 }
