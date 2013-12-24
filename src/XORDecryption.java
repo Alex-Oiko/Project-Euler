@@ -28,7 +28,7 @@ public class XORDecryption {
 			for(int f=0;f<3;f++){
 				arr[f]=alphabet[i];
 			}
-		}
+		}	
 	}
 	
 	public static void decryptSentence(){

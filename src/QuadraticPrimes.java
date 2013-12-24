@@ -27,7 +27,7 @@ public class QuadraticPrimes {
 	}
 	public static int runQuadratic(long a,long b){
 		int n=0;
-		while(isPrime(Math.abs(n*n+a*n+b))){
+		while(isPrime(Math.abs(n*n+a*n+b))){//Math.abs is very important here, as ur 30 spent minutes would suggest!!! Fucking idiot!
 			n++;
 		}
 		return n-1;

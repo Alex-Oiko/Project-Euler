@@ -5,13 +5,6 @@ public class PowerfulDigitCounts {
 	
 	public static void main(String[] args){
 		
-		/*System.out.println(calculatePower(7, 5));
-		System.out.println(calculatePower(8, 9));
-		
-		System.out.println(isPowerful("16807", 5));
-		System.out.println(isPowerful("134217728", 9));*/
-		
-		
 		int counter=0;
 		
 		for(int i=0;i<1000;i++){
