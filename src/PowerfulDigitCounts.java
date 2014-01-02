@@ -25,8 +25,8 @@ public class PowerfulDigitCounts {
 		if(number.length()==power)
 			return true;
 		else return false;
-		
 	}
+	
 	
 	public static BigInteger calculatePower(int a,int b){
 		BigInteger result = new BigInteger("1");
